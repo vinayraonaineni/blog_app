@@ -1,0 +1,48 @@
+{% extends "bbase.html" %}
+
+{% block content %}
+    <style type="text/css">
+        .main { margin-left: 25px; margin-top: 30px; }
+        .body { font-size: 1.1em; margin-top: 2px; }
+        .step-links a { font-size: 0.89em; }
+        .title {
+            font-size: 1.4em; margin-top: 20px; border-bottom: 1px solid #ccc;
+            padding-left: 4px; margin-left: 5px;
+        } 
+        #addc { width: 508px; background: #f5f5f5; padding: 3px; padding-bottom: 8px;
+            border-bottom: 1px dotted #aaa;
+            }
+        #cform { background: #f5f5f5; width: 506px; padding: 4px; padding-bottom: 0px; }
+        #submit { text-align: right; margin-right: 50px; width: 500px; margin-top: -5px; }
+        ul { margin-bottom: 30px; }
+        
+    </style>
+    <div class="main">
+        <ul>
+            {% if edit %}
+            <div id="addc">Edit Post</div>
+        
+            <form action="{% url 'blog.views.edit_post' post.get_key %}" method="POST">
+                <div id="cform">
+                    Title: {{ form.title }}
+                    <p>{{ form.body}}</p>
+                </div>
+                <div id="submit"><input type="submit" value="Submit"></div>
+            </form>
+            
+            {% else%}
+            <div id="addc">Add a post</div>
+                        
+            <form action="{% url 'blog.views.add_post' %}" method="POST">
+                <div id="cform">
+                    Title: {{ form.title }}
+                    <p>{{ form.body }}</p>
+                </div>
+                <div id="submit"><input type="submit" value="Submit"></div>
+            </form>
+            
+            {% endif %}
+            
+        </ul>
+    </div>
+{% endblock %}

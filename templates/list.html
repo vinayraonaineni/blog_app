@@ -1,0 +1,40 @@
+{% extends "bbase.html" %}
+
+{% block nav-local %}
+    <a href="{% url blog.views.add_post %}">Add post</a>
+{% endblock %}
+
+{%block content%}
+    <style type="text/css">
+        .main { margin-left: 25px; margin-top: 30px; }
+        .time { font-size: 0.8em; margin-top: 2px; }
+        .body { font-size: 1.1em; margin-top: 2px; }
+        .commentlink { text-align: right; }
+        .step-links a { font-size: 0.89em; }
+        .title {
+            font-size: 1.4em; margin-top: 20px; border-bottom: 1px solid #ccc;
+            padding-left: 4px; margin-left: 5px;
+        }
+        /*.pagination { margin-top: 20px; margin-left: -20px; }*/
+
+        ul { margin-bottom: 30px; }
+        
+    </style>
+    <div class="main">
+
+        <!-- Posts  -->
+            {% for post in posts %}
+                <div class="title">{{ post.title }}</div>
+                <ul>
+                    <div class="time">{{ post.user }} | {{ post.created }}</div>
+                    <div class="body">{{ post.body|linebreaks }}</div>
+                    <div class="commentlink">
+                    <a href="{% url blog.views.post post.get_key %}">view/edit</a>
+                    </div>
+                </ul>
+            {% endfor %}    
+    </div>
+{%endblock%}
+
+
+
